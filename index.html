@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IoT Smart Light Switch</title>
+</head>
+<body>
+  <h1>IoT Smart Light Switch</h1>
+  <button id="btnOn">Turn On</button>
+  <button id="btnOff">Turn Off</button>
+  
+  <script>
+    // JavaScript code for handling button clicks and making HTTP requests
+    document.getElementById("btnOn").addEventListener("click", function() {
+      sendCommand("on");
+    });
+
+    document.getElementById("btnOff").addEventListener("click", function() {
+      sendCommand("off");
+    });
+
+    function sendCommand(command) {
+      // Make an HTTP POST request to the ESP32's IP address
+      fetch("http://10.10.0.2/command", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "cmd=" + command
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log("Command sent successfully.");
+        } else {
+          console.log("Error sending command.");
+        }
+      })
+      .catch(error => {
+        console.error("Error sending command:", error);
+      });
+    }
+  </script>
+</body>
+</html>
