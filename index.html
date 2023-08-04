@@ -7,7 +7,9 @@
   <h1>IoT Smart Light Switch</h1>
   <button id="btnOn">Turn On</button>
   <button id="btnOff">Turn Off</button>
-  
+  <p id="message"></p> <!-- Add a paragraph to display the message -->
+  <p id="ipAddress"></p> <!-- Add a paragraph to display the IP address -->
+
   <script>
     // JavaScript code for handling button clicks and making HTTP requests
     document.getElementById("btnOn").addEventListener("click", function() {
@@ -19,8 +21,10 @@
     });
 
     function sendCommand(command) {
+      const ipAddress = "10.10.0.2"; // Replace with your ESP32's IP address
+
       // Make an HTTP POST request to the ESP32's IP address
-      fetch("http://10.10.0.2/command", {
+      fetch("http://" + ipAddress + "/command", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -30,12 +34,18 @@
       .then(response => {
         if (response.ok) {
           console.log("Command sent successfully.");
+
+          // Display the message and the IP address
+          document.getElementById("message").innerText = "Command sent: " + command;
+          document.getElementById("ipAddress").innerText = "Sent to IP address: " + ipAddress;
         } else {
           console.log("Error sending command.");
+          document.getElementById("message").innerText = "Error sending command.";
         }
       })
       .catch(error => {
         console.error("Error sending command:", error);
+        document.getElementById("message").innerText = "Error sending command.";
       });
     }
   </script>
