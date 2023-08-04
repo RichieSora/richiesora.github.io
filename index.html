@@ -4,7 +4,7 @@
   <title>IoT Smart Light Switch</title>
 </head>
 <body>
-  <h1>IoT Smart Light Switch Rev.2.1</h1>
+  <h1>IoT Smart Light Switch Rev.2.2</h1>
   <button id="btnOn">Turn On</button>
   <button id="btnOff">Turn Off</button>
   <p id="message"></p> <!-- Add a paragraph to display the message -->
@@ -24,7 +24,7 @@
       // Display the message and the IP address
       document.getElementById("message").innerText = "Command sent: " + command;
       document.getElementById("ipAddress").innerText = "Sent to IP address: " + ipAddress;
-      const ipAddress = "10.10.0.2"; // Replace with your ESP32's IP address
+      const ipAddress = "10.252.138.210"; // Replace with your ESP32's IP address
 
       // Make an HTTP POST request to the ESP32's IP address
       fetch("http://" + ipAddress + "/command", {
